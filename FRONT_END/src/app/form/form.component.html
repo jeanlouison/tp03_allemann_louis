@@ -1,10 +1,6 @@
 <div class="main-block d-flex flex-column mx-auto p-3">
     <form id="main-form" (ngSubmit)="onSubmit()" [formGroup]="mainForm" class="main-form d-flex flex-column">
 
-        <h2 *ngFor="let err of mainForm.controls.prenom.errors | keyvalue">
-            {{err.key}}
-        </h2>
-
         <!-- Alertes -->
         <ul *ngIf="mainForm.invalid && (mainForm.dirty || mainForm.touched)" class="alert alert-warning">
             <h6>Il existe des erreurs dans le formulaire :</h6>

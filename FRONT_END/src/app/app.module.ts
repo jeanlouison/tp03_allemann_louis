@@ -1,8 +1,10 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { FormComponent } from './form/form.component';
+import { ShopComponent } from './shop/shop.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AdresseComponent } from './adresse/adresse.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -19,6 +21,7 @@ import { ValidateDirective } from './validate.directive';
     AdresseComponent,
     HeaderComponent,
     FooterComponent,
+    ShopComponent,
     TelephonePipe,
     RecapComponent,
     ValidateDirective
@@ -26,7 +29,12 @@ import { ValidateDirective } from './validate.directive';
   imports: [
     BrowserModule,
     NgbModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RouterModule.forRoot([
+      // {path: '/', component: FormComponent},
+      {path: 'compte', component: FormComponent},
+      {path: 'boutique', component: ShopComponent},
+    ]),
   ],
   providers: [],
   bootstrap: [AppComponent]

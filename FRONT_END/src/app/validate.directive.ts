@@ -14,6 +14,7 @@ export class ValidateDirective {
   @HostListener('change')
 
   onChange() {
+    
     let control: AbstractControl = this.appValidate.get(this.element.nativeElement.name) ?? new FormControl();
 
     if (control != null && control.errors != null) {
@@ -27,15 +28,13 @@ export class ValidateDirective {
         
         for (const key in control.errors) {
           if (Object.prototype.hasOwnProperty.call(control.errors, key)) {
-            const element = control.errors[key];
-            console.log(key);
-            console.log(element);
-            this.element.nativeElement.style.backgroundColor = 'red';
+
+            this.element.nativeElement.style.backgroundColor = 'DarkSalmon';
           }
         }
       }
       else {
-        this.element.nativeElement.style.backgroundColor = 'red';
+        this.element.nativeElement.style.backgroundColor = 'DarkSalmon';
       }
     }
     else {
