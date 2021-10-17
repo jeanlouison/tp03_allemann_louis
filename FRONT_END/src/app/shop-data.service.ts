@@ -22,7 +22,7 @@ export class ShopDataService {
     return new Promise((resolve, reject) => {
       produitsObs.subscribe(produits => {
         produitsArray = produits as Array<Produit>;
-        resolve(Math.ceil(Math.max.apply(Math, produitsArray.map(function(produit) { return produit.prix; }))));
+        resolve(Math.ceil(Math.max.apply(Math, produitsArray.map(produit => produit.prix ))));
       }), reject});
   }
 }

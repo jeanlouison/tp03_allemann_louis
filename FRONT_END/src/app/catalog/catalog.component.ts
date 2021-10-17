@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Filters } from '../filters';
 import { Produit } from '../produit';
 import { ShopDataService } from '../shop-data.service';
 
@@ -10,14 +11,33 @@ import { ShopDataService } from '../shop-data.service';
 })
 export class CatalogComponent implements OnInit {
 
-  catalogue$: Observable<Array<Produit>>;
+  catalog$: Observable<Array<Produit>>;
+
+  filteredCatalog: Produit[] = [];
+
+  @Input() filters: Filters = new Filters();
 
   constructor(private shopDataService: ShopDataService) {
-    this.catalogue$ = new Observable<Array<Produit>>();
+    this.catalog$ = new Observable<Array<Produit>>();
   }
 
   ngOnInit(): void {
-    this.catalogue$ = this.shopDataService.getCatalogue();
+    this.updateCatalog();
+  }
+
+  updateCatalog() {
+    this.catalog$ = this.shopDataService.getCatalogue();
+
+    this.catalog$.toPromise().then(products => {
+      this.filteredCatalog = products
+        .filter(product => this.filters.gamepass ? (product.gamepass == this.filters.gamepass) : true)
+        .filter(product => this.filters.price > 0 ? product.prix < this.filters.price : true);
+    });
+  }
+
+  updateFilters($filters: Filters) {
+    this.filters = $filters;
+    this.updateCatalog();
   }
 
 }

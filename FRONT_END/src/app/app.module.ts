@@ -38,7 +38,7 @@ import { PrixPipe } from './prix.pipe';
     HttpClientModule,
     RouterModule.forRoot([
       {path: 'compte', component: FormComponent},
-      {path: 'boutique', component: ShopComponent},
+      {path: 'boutique', component: CatalogComponent},
     ]),
   ],
   providers: [],
